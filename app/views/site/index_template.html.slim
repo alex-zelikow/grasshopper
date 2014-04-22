@@ -11,7 +11,7 @@
 
 .row
   .col-md-2.text-center
-    img.img-responsive.img-circle src= "http://placekitten.com/500/500"
+    img.img-responsive.img-circle src= "#{@current_user.avatar.url(:square)}"
     .star_rating
      == star_rating(3)
     .btn-group-vertical
@@ -28,7 +28,7 @@
     .panel.panel-info.about_me
       .panel-heading>About Me
       .panel-body
-        p insert About me here
+        p = @current_user.about_me
 
     .panel.panel-default.skills
       .panel-heading
@@ -47,3 +47,10 @@
 
     .working.well
       | Currently Working with .....insert name here
+
+    .panel.panel-info.profile_picture
+      .panel-heading>Profile Picture
+      .panel-body
+        = form_for @user, :url => {:action => "update", :id => @user.id, :controller => "users"}, :html => { :multipart => true } do |form|
+          = form.file_field :avatar
+          = form.button type: :submit

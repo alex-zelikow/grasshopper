@@ -14,5 +14,9 @@ Grasshopper.config( ['RestangularProvider', (RestangularProvider) ->
 Grasshopper.config(['$routeProvider', ($routeProvider) ->
   $routeProvider.when('/edit-profile', { templateUrl: "<%= asset_path('edit-profile.html') %>", controller: 'UserCtrl' } )
 
+  $routeProvider.when('/search', { templateUrl: "<%= asset_path('search.html') %>", controller: 'SearchCtrl' } )
+
+  $routeProvider.when('/view-profile', { templateUrl: "<%= asset_path('view-profile.html') %>", controller: 'IndexCtrl' } )
+
   $routeProvider.otherwise( { templateUrl: "<%= asset_path('mainIndex.html') %>", controller: 'IndexCtrl' } )
 ])

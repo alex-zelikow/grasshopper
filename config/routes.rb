@@ -18,6 +18,7 @@ Grasshopper::Application.routes.draw do
 
   get 'privacy' => 'site#privacy'
   get 'terms'   => 'site#terms'
+  get 'profile-template' => 'site#index_template'
 
   #delete user
   delete 'user' => 'user#destroy'

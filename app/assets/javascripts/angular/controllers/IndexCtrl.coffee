@@ -14,4 +14,5 @@ Grasshopper.controller "IndexCtrl", ['$scope', '$location', 'Restangular', 'getC
   $scope.editProfile = () ->
     $location.url '/edit-profile'
 
+
 ]

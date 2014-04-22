@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   PASSWORD_RESET_TIME_LIMIT = 1.day
 
-  attr_accessor :password, :password_confirmation
+  attr_accessor :password, :password_confirmation, :avatar
 
     # t.string   "email"
     # t.string   "salt"
@@ -35,6 +35,14 @@ class User < ActiveRecord::Base
   validates :first_name, format: { with: /\A([a-zA-Z]+)(\s{1}[a-zA-z]+)*\z/ }
   validates :last_name, format: { with: /\A([a-zA-Z]+)(\s{1}[a-zA-z]+)*\z/ }
   validates :role, format: { with: /(\Amaster\z)|(\Aapprentice\z)/ }
+
+  has_attached_file :avatar, styles: {
+    thumb: '100x100>',
+    square: '200x200#',
+    medium: '300x300>'
+  }
+
+  validates_attachment_content_type :avatar, :content_type => %w(image/jpeg image/jpg image/png)
 
   def set_active
     self.is_active = true

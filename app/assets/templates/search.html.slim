@@ -1,0 +1,53 @@
+.row
+  .form-group
+    input#searchinput.form-control.input-md placeholder="Search for users by name or skills..." type="search" ng-model="searchText" value=""
+
+.row
+  ul.nav.nav-pills.nav-justified
+    li.active
+      a href="#"  All
+    li
+      a href="#"  Masters
+    li
+      a href="#"  Grasshoppers
+
+.container
+  hgroup.mb20
+    h1 Search Results
+    h2.lead
+      / strong.text-danger  3ADD
+      / | results were found for the search for
+      / strong.text-danger  UsersADD
+  section.col-xs-12.col-sm-6.col-md-12 data-ng-repeat="user in filterByNameOrSkill(users, searchText)"
+    article.search-result.row
+      .col-xs-12.col-sm-12.col-md-3
+        a.thumbnail href="#" title=("User Image")
+          img.img-responsive data-ng-click="viewProfile()" alt=("User") src="http://lorempixel.com/250/140/people" /
+      .col-xs-12.col-sm-12.col-md-2
+        ul.meta-search
+          li
+            span
+              | {{ user.role.toUpperCase() }}
+          li
+            span Rating:
+            span  two stars
+
+      .col-xs-12.col-sm-12.col-md-7.excerpet
+        h3
+          a href="#" title="" data-ng-click="viewProfile()"
+            | {{ user.first_name }} {{ user.last_name }}
+        p this is for the About me section of the user
+        .row.skills-container
+          span.col-xs-12.col-sm-12.col-md-3 Skills:
+          .ul data-ng-repeat="proficiency in user.links.proficiencies | filter: {status: 'has'}"
+            li.list-comma
+              | {{ proficiency.skill }}
+        .row.skills-container
+          span.col-xs-12.col-sm-12.col-md-3 Desired Skills:
+          .ul.skill data-ng-repeat="proficiency in user.links.proficiencies | filter: {status: 'desired'}"
+            li.list-comma
+              | {{ proficiency.skill }}
+        span.plus
+          a Send a message
+          i.glyphicon.glyphicon-envelope
+      span.clearfix.borda

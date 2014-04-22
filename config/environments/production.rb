@@ -77,4 +77,14 @@ Grasshopper::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  config.paperclip_defaults = {
+  :storage => :s3,
+  :s3_credentials => {
+  :bucket => "wdi-grasshopper",
+  :access_key_id => ENV["AWSAccessKeyId"],
+  :secret_access_key => ENV["AWSSecretKey"],
+  :s3_host_name => 'http://s3-ap-southeast-1.amazonaws.com'
+  }
+  }
 end

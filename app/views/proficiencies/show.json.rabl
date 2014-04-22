@@ -8,6 +8,7 @@ node :links do |proficiency|
       {
         href: skill_url(proficiency.skill),
         id: proficiency.skill.id,
+        name: proficiency.skill.skill_name,
         type: "skill"
       },
     user:

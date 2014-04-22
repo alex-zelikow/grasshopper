@@ -1,0 +1,36 @@
+.row
+  .col-md-2.text-center
+    img.img-responsive.img-circle src= "http://placekitten.com/500/500"
+    .btn-group-vertical
+      / .button.button.btn.btn-default data-ng-click="editProfile()"
+      /   | Edit Profile
+      .button.button.btn.btn-default> Send Message
+      .button.button.btn.btn-default> Bow
+  .col-md-10
+    .profile_text
+      | {{ currentUser.data.first_name }} {{ currentUser.data.last_name }}
+      div
+        span.label.label-primary
+          | {{ currentUser.data.role.toUpperCase() }}
+        span.label class="label {{ currentUser.data.activeLabel }}"
+          | {{ currentUser.data.activeorinactive }}
+
+    div.panel.panel-info.about_me
+      .div.panel-heading>About Me
+      .div.panel-body
+        p insert About me here
+
+    div.panel.panel-default.skills
+      div.panel-heading
+        | Skills
+      table.table.skills_table
+        thead
+          tr
+            th
+              | Current Skill
+            th
+              | Desired Skills
+        tbody
+            tr
+              td need to add
+              td need to add

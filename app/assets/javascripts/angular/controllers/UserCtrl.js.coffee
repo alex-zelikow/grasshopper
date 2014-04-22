@@ -2,4 +2,5 @@ Grasshopper.controller "UserCtrl", (['$scope', '$location', 'Restangular', 'getC
   $scope.currentUser = getCurrentUser.currentUser
 
   getCurrentUser.loadData()
+
 ])
