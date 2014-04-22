@@ -18,7 +18,7 @@ html
           h1.navbar-brand
             a href="/" Grasshopper
           p.navbar-text.navbar-right
-            a.navbar-link.navbar-right href=register_view_url Register
+            = link_to "Register", register_view_url, method: :get, class: "navbar-link navbar-right" if !current_user
             = link_to "Log In", log_in_url, method: :get, class: "navbar-link navbar-right" if !current_user
             = link_to "Log Out", log_out_url, method: :delete, class: "navbar-link navbar-right" if current_user
       main.container.main role="main" data-ng-app="Grasshopper"
