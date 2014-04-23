@@ -9,7 +9,7 @@
     li ng-click="roleFilter = {role: 'master'}"
       a#master href="" Masters
     li ng-click="roleFilter = {role: 'apprentice'}"
-      a#apprentice href=""  Apprentices
+      a#apprentice href="" Apprentices
 
 .container
   hgroup.mb20
@@ -48,9 +48,30 @@
           .ul.skill data-ng-repeat="proficiency in user.links.proficiencies | filter: {status: 'desired'}"
             li.list-comma
               | {{ proficiency.skill }}{{$last ? '' : ', '}}
-        span.plus
+        span.plus data-target="#myModal" data-toggle="modal"
           a href=""
             i.glyphicon.glyphicon-envelope
           a href="" Send a message
+
+        #myModal.modal.fade aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+          .modal-dialog
+            .modal-content
+              .modal-header
+                button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
+                h4#myModalLabel.modal-title Modal title
+              .modal-body
+                | Lots of text and messages and stuff
+                br Current user: {{ currentUser }}
+                br Current user conversations: {{ currentUser.data.links.conversations }}
+                br Receiving user: {{ user }}
+                br Receiving user conversations: {{ user.links.conversations }}
+                data-ng-repeat="message in user.links.conversation"
+                textarea.form-control rows="3" data-ng-model="messageText"
+              .modal-footer
+                button.btn.btn-primary type="button" data-ng-click="submit()" Submit
+                button.btn.btn-default data-dismiss="modal" type="button" Close
+
+        div data-ng-show="message"
+          p
       span.clearfix.borda
 

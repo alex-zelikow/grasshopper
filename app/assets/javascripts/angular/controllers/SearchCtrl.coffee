@@ -32,6 +32,9 @@ Grasshopper.controller "SearchCtrl", ['$scope', '$location', 'Restangular', 'get
       filteredUsers.push user if isMatch == true
     filteredUsers
 
+  $scope.submit = () ->
+    console.log 'submitted'
+    debugger
 
   $("ul.nav.nav-pills.nav-justified li a").click () ->
     $(this).parent().addClass("active").siblings().removeClass "active"
