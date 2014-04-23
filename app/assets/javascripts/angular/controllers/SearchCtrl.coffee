@@ -32,9 +32,15 @@ Grasshopper.controller "SearchCtrl", ['$scope', '$location', 'Restangular', 'get
       filteredUsers.push user if isMatch == true
     filteredUsers
 
+  $scope.checkForExistingConversation = (currentUser, selectedUser) ->
+    Restangular.one('conversations').getList().then (conversations) ->
+      existingConversation = conversation for conversation in conversations when \
+        conversation.links.created_by.id == selectedUser.id or \
+        conversation.links.created_for.id == selectedUser.id
+        $scope.messages = existingConversation.links.messages
+
   $scope.submit = () ->
     console.log 'submitted'
-    debugger
 
   $("ul.nav.nav-pills.nav-justified li a").click () ->
     $(this).parent().addClass("active").siblings().removeClass "active"
