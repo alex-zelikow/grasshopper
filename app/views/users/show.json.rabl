@@ -1,6 +1,6 @@
 collection @user, root: "users", :object_root => false
 
-attributes :email, :first_name, :last_name, :role, :is_active
+attributes :email, :first_name, :last_name, :about_me, :role, :is_active
 
 node :links do |user|
   {

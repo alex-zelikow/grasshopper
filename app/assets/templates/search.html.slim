@@ -4,12 +4,12 @@
 
 .row
   ul.nav.nav-pills.nav-justified
-    li.active
-      a href="#"  All
-    li
-      a href="#"  Masters
-    li
-      a href="#"  Grasshoppers
+    li.active ng-click="roleFilter = null"
+      a href="" All
+    li ng-click="roleFilter = {role: 'master'}"
+      a#master href="" Masters
+    li ng-click="roleFilter = {role: 'apprentice'}"
+      a#apprentice href=""  Apprentices
 
 .container
   hgroup.mb20
@@ -18,11 +18,11 @@
       / strong.text-danger  3ADD
       / | results were found for the search for
       / strong.text-danger  UsersADD
-  section.col-xs-12.col-sm-6.col-md-12 data-ng-repeat="user in filterByNameOrSkill(users, searchText)"
+  section.col-xs-12.col-sm-6.col-md-12 data-ng-repeat="user in filterByNameOrSkill(users, searchText) | filter:roleFilter"
     article.search-result.row
       .col-xs-12.col-sm-12.col-md-3
-        a.thumbnail href="#" title=("User Image")
-          img.img-responsive data-ng-click="viewProfile()" alt=("User") src="http://lorempixel.com/250/140/people" /
+        a.thumbnail href="" title=("User Image") data-ng-click="viewProfile()"
+          img.img-responsive alt=("User") src="http://lorempixel.com/250/140/people"
       .col-xs-12.col-sm-12.col-md-2
         ul.meta-search
           li
@@ -34,20 +34,22 @@
 
       .col-xs-12.col-sm-12.col-md-7.excerpet
         h3
-          a href="#" title="" data-ng-click="viewProfile()"
+          a href="" title="" data-ng-click="viewProfile()"
             | {{ user.first_name }} {{ user.last_name }}
-        p this is for the About me section of the user
+        p
+          | {{ user.about_me }}
         .row.skills-container
           span.col-xs-12.col-sm-12.col-md-3 Skills:
           .ul data-ng-repeat="proficiency in user.links.proficiencies | filter: {status: 'has'}"
             li.list-comma
-              | {{ proficiency.skill }}
+              | {{ proficiency.skill }}{{$last ? '' : ', '}}
         .row.skills-container
           span.col-xs-12.col-sm-12.col-md-3 Desired Skills:
           .ul.skill data-ng-repeat="proficiency in user.links.proficiencies | filter: {status: 'desired'}"
             li.list-comma
-              | {{ proficiency.skill }}
+              | {{ proficiency.skill }}{{$last ? '' : ', '}}
         span.plus
-          a Send a message
           i.glyphicon.glyphicon-envelope
+          a  Send a message
       span.clearfix.borda
+

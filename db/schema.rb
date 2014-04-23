@@ -15,11 +15,6 @@ ActiveRecord::Schema.define(version: 20140422071715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  create_table "registrants", force: true do |t|
-    t.string "email"
-    t.string "registration_code"
-    t.datetime "registration_expires_at"
-  end
 
   create_table "apprenticeships", force: true do |t|
     t.datetime "end_date",      null: false
