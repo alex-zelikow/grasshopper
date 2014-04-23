@@ -3,7 +3,6 @@
 //= require noty/packaged/jquery.noty.packaged.min
 //= require noty/themes/default
 //= require main
-//= require semantic
 //= require angular.min
 //= require lodash
 //= require restangular
