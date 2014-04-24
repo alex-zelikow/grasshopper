@@ -37,10 +37,15 @@ Grasshopper.controller "SearchCtrl", ['$scope', '$location', 'Restangular', 'get
       existingConversation = conversation for conversation in conversations when \
         conversation.links.created_by.id == selectedUser.id or \
         conversation.links.created_for.id == selectedUser.id
+        $scope.conversation = existingConversation
         $scope.messages = existingConversation.links.messages
 
-  $scope.submit = () ->
-    console.log 'submitted'
+  $scope.submitMessage = (messageText) ->
+    thisConversation = $scope.conversation
+    console.log("PATCH REQUEST")
+    $scope.messageText = ''
+    # Restangular.patch(object, [queryParams, headers])
+    debugger
 
   $("ul.nav.nav-pills.nav-justified li a").click () ->
     $(this).parent().addClass("active").siblings().removeClass "active"

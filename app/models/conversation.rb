@@ -27,4 +27,8 @@ class Conversation < ActiveRecord::Base
     end
   end
 
+  def create_message(params)
+    binding.pry
+  end
+
 end

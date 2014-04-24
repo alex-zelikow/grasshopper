@@ -8,4 +8,9 @@ class ConversationsController < ApplicationController
     @conversation = Conversation.find(params[:id])
   end
 
+  def update
+    binding.pry
+    create_message(params) if current_user == params[:sender]
+  end
+
 end
