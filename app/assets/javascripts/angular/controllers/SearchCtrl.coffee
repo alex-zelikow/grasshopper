@@ -1,25 +1,15 @@
-
 Grasshopper.controller "SearchCtrl", ['$scope', '$location', 'Restangular', 'targetUser', ($scope, $location, Restangular, targetUser) ->
 
   initialize = () ->
     baseUsers = Restangular.all('users')
     baseUsers.getList().then (users) ->
       $scope.users = users
-
-  $scope.targetUser = targetUser
-
-  targetUser.loadCurrentUser()
+    $scope.currentUser = targetUser.loadCurrentUser()
 
   initialize()
 
   $scope.search = () ->
     $location.url '/search'
-
-  $scope.viewProfile = (userId) ->
-    # $location.url '/view-profile'
-    # test targetUser functionality
-    targetUser.loadUser(userId)
-    console.log targetUser.data
 
   $scope.searchText = ''
 
@@ -38,12 +28,14 @@ Grasshopper.controller "SearchCtrl", ['$scope', '$location', 'Restangular', 'tar
     filteredUsers
 
   $scope.checkForExistingConversation = (currentUser, selectedUser) ->
-    Restangular.one('conversations').getList().then (conversations) ->
-      existingConversation = conversation for conversation in conversations when \
+    debugger
+    Restangular.one('users/' + currentUser.id).get().then (thisUser) ->
+      existingConversation = conversation for conversation in thisUser.linked.conversations when \
         conversation.links.created_by.id == selectedUser.id or \
         conversation.links.created_for.id == selectedUser.id
         $scope.conversation = existingConversation
         $scope.messages = existingConversation.links.messages
+        debugger
 
   # $scope.submitMessage = (messageText) ->
   #   thisConversation = $scope.conversation

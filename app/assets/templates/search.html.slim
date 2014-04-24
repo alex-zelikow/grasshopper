@@ -61,7 +61,7 @@
                 h4#myModalLabel.modal-title Modal title
               .modal-body
                 | Lots of text and messages and stuff
-                br Current user conversations: {{ currentUser.data.links.conversations }}
+                br Current user conversations: {{ currentUser.links.conversations }}
                 br Receiving user conversations: {{ user.links.conversations }}
                 div data-ng-repeat-start="message in messages"
                   | {{ message }}

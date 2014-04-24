@@ -12,16 +12,16 @@
         legend Update your profile
         .form-group
           label.sr-only for="first_name"
-          input.form-control#first_name type="text" placeholder="First name" data-ng-model="targetUser.data.first_name"
+          input.form-control#first_name type="text" placeholder="First name" data-ng-model="currentUser.first_name"
         .form-group
           label.sr-only for="last_name"
-          input.form-control#last_name type="text" placeholder="Last name" data-ng-model="targetUser.data.last_name"
+          input.form-control#last_name type="text" placeholder="Last name" data-ng-model="currentUser.last_name"
         .form-group
           label.sr-only for="about_me"
-          textarea.form-control placeholder="About me" data-ng-model="targetUser.data.about_me"
+          textarea.form-control placeholder="About me" data-ng-model="currentUser.about_me"
         .checkbox
           label
-            input#toggle_activation type="checkbox" data-ng-model="targetUser.data.is_active" data-ng-checked="targetUser.data.is_active" Active?
+            input#toggle_activation type="checkbox" data-ng-model="currentUser.is_active" data-ng-checked="currentUser.is_active" Active?
         input.btn.btn-success type="submit" value="Update profile" data-ng-click="updateProfile()"
 
     legend
@@ -30,6 +30,6 @@
       .panel-heading
         | Current Skills
       ul.list-group
-        li.list-group-item data-ng-repeat="proficiency in targetUser.data.links.proficiencies"
+        li.list-group-item data-ng-repeat="proficiency in currentUser.links.proficiencies"
           | {{ proficiency.skill }}
           a.remove-skill href="" data-ng-click="removeSkill(proficiency.id)" Remove

@@ -23,7 +23,7 @@ Grasshopper.config(['$routeProvider', ($routeProvider) ->
 
   $routeProvider.when('/search', { templateUrl: "<%= asset_path('search.html') %>", controller: 'SearchCtrl' } )
 
-  $routeProvider.when('/view-profile/:userID', { templateUrl: "<%= asset_path('view-profile.html') %>", controller: 'UserCtrl' } )
+  $routeProvider.when('/view-profile/:userID', { templateUrl: "<%= asset_path('view-profile.html') %>", controller: 'ViewProfileCtrl' } )
 
   $routeProvider.when('/conversation', { templateUrl: "<%= asset_path('conversation.html') %>", controller: 'ConversationCtrl' } )
 

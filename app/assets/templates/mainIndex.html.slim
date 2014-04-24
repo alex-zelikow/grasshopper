@@ -4,23 +4,24 @@
     .star_rating
       | Get averge star rating here
     .btn-group-vertical
-      .button.button.btn.btn-default> Edit Profile
+      .button.button.btn.btn-default data-ng-click="editProfile()"
+        | Edit Profile
       .button.button.btn.btn-default> Send Message
       .button.button.btn.btn-default> Bow
   .col-md-10
     .profile_text
-      | {{ targetUser.data.first_name }} {{ targetUser.data.last_name }}
+      | {{ currentUser.first_name }} {{ currentUser.last_name }}
       div
         span.label.label-primary
-          | {{ targetUser.data.role.toUpperCase() }}
-        span.label class="label {{ targetUser.data.activeLabel }}"
-          | {{ targetUser.data.activeorinactive.toUpperCase() }}
+          | {{ currentUser.role.toUpperCase() }}
+        span.label class="label {{ currentUser.activeLabel }}"
+          | {{ currentUser.activeorinactive.toUpperCase() }}
 
     .panel.panel-info.about_me
       .panel-heading>About Me
       .panel-body
         p
-          | {{ targetUser.data.about_me }}
+          | {{ currentUser.about_me }}
 
     .panel.panel-default.skills
       .panel-heading

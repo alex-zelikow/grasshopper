@@ -1,11 +1,11 @@
-Grasshopper.controller "UserCtrl", (['$scope', '$location', 'Restangular', 'targetUser', ($scope, $location, Restangular, targetUser) ->
-  $scope.targetUser = targetUser
-
-  targetUser.loadCurrentUser()
+Grasshopper.controller "UserCtrl", (['$scope', '$location', 'Restangular', 'targetUser', '$routeParams', ($scope, $location, Restangular, targetUser, $routeParams) ->
+  $scope.currentUser = targetUser.loadCurrentUser()
+  userId = parseInt $routeParams.userID, 10
+  $scope.targetUser = targetUser.loadUser(userId)
 
   $scope.updateProfile = () ->
-    targetUser.data.route = 'users'
-    targetUser.data.put().then ( ->
+    $scope.currentUser.route = 'users'
+    $scope.currentUser.put().then ( ->
       $location.path('/')
     )
 
@@ -14,7 +14,7 @@ Grasshopper.controller "UserCtrl", (['$scope', '$location', 'Restangular', 'targ
       proficiency.route = 'proficiencies/' + proficiencyId
       proficiency.remove()
       proficiencies = $scope.targetUser.data.links.proficiencies
-      console.log "selected proficiency index", idx = _.findIndex(proficiencies, (proficiency) ->
+      idx = _.findIndex(proficiencies, (proficiency) ->
         proficiency.id == proficiencyId
       )
       proficiencies.splice(idx, 1)
