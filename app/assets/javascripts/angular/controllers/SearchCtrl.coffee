@@ -28,21 +28,27 @@ Grasshopper.controller "SearchCtrl", ['$scope', '$location', 'Restangular', 'tar
     filteredUsers
 
   $scope.checkForExistingConversation = (currentUser, selectedUser) ->
-    debugger
-    Restangular.one('users/' + currentUser.id).get().then (thisUser) ->
-      existingConversation = conversation for conversation in thisUser.linked.conversations when \
-        conversation.links.created_by.id == selectedUser.id or \
-        conversation.links.created_for.id == selectedUser.id
+    Restangular.one('conversations').getList().then (conversations) ->
+      console.log conversations
+      existingConversation = conversation for conversation in conversations when \
+        (conversation.links.created_by.id == selectedUser.id and \
+        conversation.links.created_for.id == currentUser.id) or \
+        (conversation.links.created_for.id == selectedUser.id and \
+        conversation.links.created_by.id == currentUser.id)
         $scope.conversation = existingConversation
         $scope.messages = existingConversation.links.messages
-        debugger
+        binding.pry
 
-  # $scope.submitMessage = (messageText) ->
-  #   thisConversation = $scope.conversation
-  #   console.log("PATCH REQUEST")
-  #   $scope.messageText = ''
-  #   # Restangular.patch(object, [queryParams, headers])
-  #   debugger
+  $scope.submitMessage = (user, messageText) ->
+    unless $scope.conversation
+      conversations = Restangular.all('conversations')
+      newConversation = {created_by: $scope.currentUser.id, created_for: user.id}
+      console.log conversations.post(newConversation)
+      binding.pry
+
+    # var baseAccounts = Restangular.all('accounts');
+    # var newAccount = {name: "Gonto's account"};
+    # baseAccounts.post(newAccount);
 
   $("ul.nav.nav-pills.nav-justified li a").click () ->
     $(this).parent().addClass("active").siblings().removeClass "active"
