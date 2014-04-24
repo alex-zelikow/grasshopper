@@ -266,3 +266,65 @@ li.list-comma {
   list-style-type: none;
   float: left;
 }
+
+// conversation message
+
+#conversation-panel {
+
+  .panel-body{
+    height: 400px;
+    padding: 5px;
+    padding-left: 10px;
+    overflow: auto;
+  }
+
+  .conversation {
+    border-bottom: 2px solid rgba(0,0,0,.075);
+    padding-bottom: 10px;
+
+  }
+
+  h3{
+    font-size: 18px;
+    margin-top: 10px;
+    text-align: center;
+
+  }
+
+  img{
+    margin-right: 10px;
+
+  }
+}
+
+#message-panel {
+
+  .panel-body {
+    padding: 5px;
+    padding-left: 10px;
+    height: 200px;
+    overflow: auto;
+  }
+
+  .message {
+    border-bottom: 2px solid rgba(0,0,0,.075);
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+  }
+
+  h3{
+    font-size: 18px;
+
+  }
+
+  img{
+    margin-right: 10px;
+
+  }
+}
+
+.form-control{
+  margin-bottom: 10px;
+}
+

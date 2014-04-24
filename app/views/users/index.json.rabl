@@ -24,7 +24,7 @@ end
 node :linked do
   {
     apprenticeships:
-      Apprenticeship.all.map do |apprenticeship|
+      @apprenticeships.map do |apprenticeship|
         {
           href: apprenticeship_url(apprenticeship),
           id: apprenticeship.id,
@@ -35,7 +35,7 @@ node :linked do
         }
       end,
     proficiencies:
-      Proficiency.all.map do |proficiency|
+      @proficiencies.map do |proficiency|
         {
           href: proficiency_url(proficiency),
           id: proficiency.id,
@@ -44,7 +44,7 @@ node :linked do
         }
       end,
     conversations:
-      Conversation.all.map do |conversation|
+      @conversations.map do |conversation|
         {
           href: conversation_url(conversation),
           id: conversation.id,

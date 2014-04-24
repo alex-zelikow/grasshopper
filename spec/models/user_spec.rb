@@ -95,7 +95,7 @@ describe User do
 
   describe "Set random password if password is not provided" do
     before :each do
-      @user = User.new email: 'harry@ga.co'
+      @user = User.new email: 'harry@ga.co', first_name: "", last_name: ""
     end
 
     context "salt and fish exists" do

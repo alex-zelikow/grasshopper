@@ -21,7 +21,7 @@
   section.col-xs-12.col-sm-6.col-md-12 data-ng-repeat="user in filterByNameOrSkill(users, searchText) | filter:roleFilter"
     article.search-result.row
       .col-xs-12.col-sm-12.col-md-3
-        a.thumbnail href="" title=("User Image") data-ng-click="viewProfile()"
+        a.thumbnail href="" title=("User Image") data-ng-click="viewProfile(user.id)"
           img.img-responsive alt=("User") src="http://lorempixel.com/250/140/people"
       .col-xs-12.col-sm-12.col-md-2
         ul.meta-search
@@ -34,19 +34,19 @@
 
       .col-xs-12.col-sm-12.col-md-7.excerpet
         h3
-          a href="" title="" data-ng-click="viewProfile()"
+          a data-ng-href="#/view-profile/{{user.id}}" title=""
             | {{ user.first_name }} {{ user.last_name }}
         p
           | {{ user.about_me }}
         .row.skills-container
           span.col-xs-12.col-sm-12.col-md-3 Skills:
           .ul data-ng-repeat="proficiency in user.links.proficiencies | filter: {status: 'has'}"
-            li.list-comma
+            li.list-comma>
               | {{ proficiency.skill }}{{$last ? '' : ', '}}
         .row.skills-container
           span.col-xs-12.col-sm-12.col-md-3 Desired Skills:
           .ul.skill data-ng-repeat="proficiency in user.links.proficiencies | filter: {status: 'desired'}"
-            li.list-comma
+            li.list-comma>
               | {{ proficiency.skill }}{{$last ? '' : ', '}}
         span.plus data-target="#myModal{{user.id}}" data-toggle="modal" data-ng-click="checkForExistingConversation(currentUser, user)"
           a href=""

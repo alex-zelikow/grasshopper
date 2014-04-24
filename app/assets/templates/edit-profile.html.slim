@@ -12,11 +12,24 @@
         legend Update your profile
         .form-group
           label.sr-only for="first_name"
-          input.form-control#first_name type="text" placeholder="First name" data-ng-model="currentUser.data.first_name"
+          input.form-control#first_name type="text" placeholder="First name" data-ng-model="targetUser.data.first_name"
         .form-group
           label.sr-only for="last_name"
-          input.form-control#last_name type="text" placeholder="Last name" data-ng-model="currentUser.data.last_name"
+          input.form-control#last_name type="text" placeholder="Last name" data-ng-model="targetUser.data.last_name"
+        .form-group
+          label.sr-only for="about_me"
+          textarea.form-control placeholder="About me" data-ng-model="targetUser.data.about_me"
         .checkbox
           label
-            input#toggle_activation type="checkbox" data-ng-checked="currentUser.data.is_active" Active?
-        input.btn.btn-success type="submit" value="Update"
+            input#toggle_activation type="checkbox" data-ng-model="targetUser.data.is_active" data-ng-checked="targetUser.data.is_active" Active?
+        input.btn.btn-success type="submit" value="Update profile" data-ng-click="updateProfile()"
+
+    legend
+      | Update your skills
+    .panel.panel-default.skills
+      .panel-heading
+        | Current Skills
+      ul.list-group
+        li.list-group-item data-ng-repeat="proficiency in targetUser.data.links.proficiencies"
+          | {{ proficiency.skill }}
+          a.remove-skill href="" data-ng-click="removeSkill(proficiency.id)" Remove

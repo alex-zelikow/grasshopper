@@ -24,12 +24,4 @@ describe ConversationsController, :type => :api do
 
   end
 
-  describe "GET show" do
-
-    it "return specific conversation" do
-      get :show, id: Conversation.first.id, :format => :json
-      expect(response.status).to eq 200
-    end
-
-  end
 end

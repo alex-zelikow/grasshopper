@@ -22,14 +22,12 @@ child @apprenticeships do
 end
 
 node :linked do
-  users = @apprenticeships.map { |apprenticeship| [apprenticeship.master.id, apprenticeship.apprentice.id] }
-  users.flatten!.uniq!
   {
-    users: users.map do |user|
+    users: @users.map do |user|
       {
         href:     user_url(user),
-        id:       user,
-        username: User.find(user).username
+        id:       user.id,
+        username: user.username
       }
     end,
 

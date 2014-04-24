@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   before_validation :format_attributes
   before_save :encrypt_password, if: :password
   before_create :set_random_password, unless: :password
-  before_create :create_username
+  after_initialize :create_username
   after_initialize :set_active
 
   validates :email, format: { with: /.*@.*\..*/ }, uniqueness: { case_sensitive: false }
@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :avatar, :content_type => %w(image/jpeg image/jpg image/png)
 
   def set_active
-    self.is_active = true
+    self.is_active = true if self.new_record?
   end
 
   def self.nil_expired_reset_codes

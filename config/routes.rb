@@ -24,41 +24,79 @@ Grasshopper::Application.routes.draw do
   get 'profile-template' => 'site#index_template'
 
   #delete user
-  delete 'user' => 'user#destroy'
+  # delete 'user' => 'user#destroy'
 
   #User Profile
-  get 'profile' => 'users#show'
 
   scope :api do
 
     root to: 'api#index', defaults: { format: :json }, as: :api_root
 
-    resources :users, except: [ :edit, :new ], defaults: { format: :json } do
-      get ':id' => "users#show", on: :collection
+    get 'user' => 'users#profile', defaults: { format: :json }, as: :profile
+
+    resources :users, except: [ :show, :edit, :new ], defaults: { format: :json } do
+      get ':id' => "users#index", on: :collection
+
+      resources :proficiencies, except: [ :show, :edit, :new ], defaults: { format: :json } do
+        get ':id' => "proficiencies#index", on: :collection
+
+        resources :skills, except: [ :show, :edit, :new ], defaults: { format: :json } do
+          get ':id' => "skills#index", on: :collection
+        end
+      end
+
+      resources :conversations, except: [ :show, :edit, :new ], defaults: { format: :json } do
+        get ':id' => "conversations#index", on: :collection
+
+        resources :messages, except: [ :show, :edit, :new ], defaults: { format: :json } do
+          get ':id' => "messages#index", on: :collection
+        end
+
+      end
+
+      resources :apprenticeships, except: [ :show, :edit, :new ], defaults: { format: :json } do
+        get ':id' => "apprenticeships#index", on: :collection
+
+        resources :ratings, except: [ :show, :edit, :new ], defaults: { format: :json } do
+          get ':id' => "ratings#index", on: :collection
+        end
+      end
     end
 
-    resources :skills, except: [ :edit, :new ], defaults: { format: :json } do
-      get ':id' => "skills#show", on: :collection
+    resources :proficiencies, except: [ :show, :edit, :new ], defaults: { format: :json } do
+      get ':id' => "proficiencies#index", on: :collection
+
+      resources :skills, except: [ :show, :edit, :new ], defaults: { format: :json } do
+        get ':id' => "skills#index", on: :collection
+      end
     end
 
-    resources :proficiencies, except: [ :edit, :new ], defaults: { format: :json } do
-      get ':id' => "proficiencies#show", on: :collection
+    resources :skills, except: [ :show, :edit, :new ], defaults: { format: :json } do
+      get ':id' => "skills#index", on: :collection
     end
 
-    resources :conversations, except: [ :edit, :new ], defaults: { format: :json } do
-      get ':id' => "conversations#show", on: :collection
+    resources :conversations, except: [ :show, :edit, :new ], defaults: { format: :json } do
+      get ':id' => "conversations#index", on: :collection
+
+      resources :messages, except: [ :show, :edit, :new ], defaults: { format: :json } do
+        get ':id' => "messages#index", on: :collection
+      end
     end
 
-    resources :messages, except: [ :edit, :new ], defaults: { format: :json } do
-      get ':id' => "messages#show", on: :collection
+    resources :messages, except: [ :show, :edit, :new ], defaults: { format: :json } do
+      get ':id' => "messages#index", on: :collection
     end
 
-    resources :apprenticeships, except: [ :edit, :new ], defaults: { format: :json } do
-      get ':id' => "apprenticeships#show", on: :collection
+    resources :apprenticeships, except: [ :show, :edit, :new ], defaults: { format: :json } do
+      get ':id' => "apprenticeships#index", on: :collection
+
+      resources :ratings, except: [ :show, :edit, :new ], defaults: { format: :json } do
+        get ':id' => "ratings#index", on: :collection
+      end
     end
 
-    resources :ratings, except: [ :edit, :new ], defaults: { format: :json } do
-      get ':id' => "ratings#show", on: :collection
+    resources :ratings, except: [ :show, :edit, :new ], defaults: { format: :json } do
+      get ':id' => "ratings#index", on: :collection
     end
 
   end

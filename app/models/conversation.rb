@@ -4,14 +4,12 @@ class Conversation < ActiveRecord::Base
   belongs_to :created_for, class_name: "User", foreign_key: "created_for"
   belongs_to :created_by, class_name: "User", foreign_key: "created_by"
 
+  scope :involve_user, lambda {|user| where(["created_for = ? or created_by = ?", user.id, user.id])}
+
   validates :created_for, presence: true
   validates :created_by, presence: true
   validate :created_for_and_created_by_cannot_be_same
   validate :cannot_have_existing_conversation, on: :create
-
-  def self.involve_user(user)
-    where(["created_for = ? or created_by = ?", user.id, user.id])
-  end
 
   def created_for_and_created_by_cannot_be_same
     if created_for == created_by

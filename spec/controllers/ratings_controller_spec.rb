@@ -25,12 +25,4 @@ describe RatingsController, :type => :api do
 
   end
 
-  describe "GET show" do
-
-    it "return specific rating" do
-      get :show, id: Rating.first.id, :format => :json
-      expect(response.status).to eq 200
-    end
-
-  end
 end

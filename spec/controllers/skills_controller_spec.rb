@@ -18,12 +18,4 @@ describe SkillsController, :type => :api do
 
   end
 
-  describe "GET show" do
-
-    it "return specific skill" do
-      get :show, id: Skill.first.id, :format => :json
-      expect(response.status).to eq 200
-    end
-
-  end
 end

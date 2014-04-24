@@ -22,12 +22,8 @@ child @ratings do
 end
 
 node :linked do
-  users = @ratings.map { |rating| [rating.rater, rating.ratee] }
-  users.flatten!.uniq!
-  apprenticeship = @ratings.map { |rating| rating.apprenticeship }
-  apprenticeship.uniq!
   {
-    users: users.map do |user|
+    users: @users.map do |user|
       {
         href:     user_url(user),
         id:       user.id,
@@ -35,7 +31,7 @@ node :linked do
       }
     end,
 
-    apprenticeship: apprenticeship.map do |apprenticeship|
+    apprenticeships: @apprenticeships.map do |apprenticeship|
       {
         href:   apprenticeship_url(apprenticeship),
         id:     apprenticeship.id,

@@ -22,12 +22,8 @@ child @messages do
 end
 
 node :linked do
-  users = @messages.map { |message| [message.sender, message.recipient] }
-  users.flatten!.uniq!
-  conversations = @messages.map { |message| message.conversation }
-  conversations.uniq!
   {
-    users: users.map do |user|
+    users: @users.map do |user|
       {
         href:     user_url(user),
         id:       user.id,
@@ -35,7 +31,7 @@ node :linked do
       }
     end,
 
-    conversations: conversations.map do |conversation|
+    conversations: @conversations.map do |conversation|
       {
         href:   conversation_url(conversation),
         id:     conversation.id,

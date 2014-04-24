@@ -1,21 +1,25 @@
-Grasshopper.controller "SearchCtrl", ['$scope', '$location', 'Restangular', 'getCurrentUser', ($scope, $location, Restangular, getCurrentUser) ->
+
+Grasshopper.controller "SearchCtrl", ['$scope', '$location', 'Restangular', 'targetUser', ($scope, $location, Restangular, targetUser) ->
 
   initialize = () ->
     baseUsers = Restangular.all('users')
     baseUsers.getList().then (users) ->
       $scope.users = users
 
-  $scope.currentUser = getCurrentUser.currentUser
+  $scope.targetUser = targetUser
 
-  getCurrentUser.loadData()
+  targetUser.loadCurrentUser()
 
   initialize()
 
   $scope.search = () ->
     $location.url '/search'
 
-  $scope.viewProfile = () ->
-    $location.url '/view-profile'
+  $scope.viewProfile = (userId) ->
+    # $location.url '/view-profile'
+    # test targetUser functionality
+    targetUser.loadUser(userId)
+    console.log targetUser.data
 
   $scope.searchText = ''
 
@@ -30,6 +34,7 @@ Grasshopper.controller "SearchCtrl", ['$scope', '$location', 'Restangular', 'get
         if proficiency.skill.match(searchTextRegExp)
           isMatch = true
       filteredUsers.push user if isMatch == true
+    console.log searchText
     filteredUsers
 
   $scope.checkForExistingConversation = (currentUser, selectedUser) ->
@@ -40,12 +45,12 @@ Grasshopper.controller "SearchCtrl", ['$scope', '$location', 'Restangular', 'get
         $scope.conversation = existingConversation
         $scope.messages = existingConversation.links.messages
 
-  $scope.submitMessage = (messageText) ->
-    thisConversation = $scope.conversation
-    console.log("PATCH REQUEST")
-    $scope.messageText = ''
-    # Restangular.patch(object, [queryParams, headers])
-    debugger
+  # $scope.submitMessage = (messageText) ->
+  #   thisConversation = $scope.conversation
+  #   console.log("PATCH REQUEST")
+  #   $scope.messageText = ''
+  #   # Restangular.patch(object, [queryParams, headers])
+  #   debugger
 
   $("ul.nav.nav-pills.nav-justified li a").click () ->
     $(this).parent().addClass("active").siblings().removeClass "active"

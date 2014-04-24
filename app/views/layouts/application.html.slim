@@ -13,7 +13,7 @@ html
     = javascript_include_tag "application"
   body data-ng-app="Grasshopper"
     #wrap
-      header.navbar.navbar-inverse.navbar-fixed-top role="banner"
+      header.navbar.navbar-inverse.navbar-fixed-top role="banner" data-ng-controller="SearchCtrl"
         .container
           h1.navbar-brand
             a href="/" Grasshopper
@@ -21,13 +21,9 @@ html
             = link_to "Register", register_view_url, method: :get, class: "navbar-link navbar-right" if !current_user
             = link_to "Log In", log_in_url, method: :get, class: "navbar-link navbar-right" if !current_user
             = link_to "Log Out", log_out_url, method: :delete, class: "navbar-link navbar-right" if current_user
-          / form.navbar-form.navbar-right role="search"
-          /   .form-group data-ng-controller="SearchCtrl"
-          /     input.form-control placeholder="Search user or skill" type="search" ng-model="searchText" value=""
-          /     button.btn.btn-default data-ng-click="search()" Search
+            a.glyphicon.glyphicon-search> href=""  data-ng-click="search()"
       main.container.main role="main"
-        div#data data-current-user-id="#{@current_user.id if @current_user }"
-          == yield
+        == yield
     footer>
       .container
         .row

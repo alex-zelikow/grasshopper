@@ -5,29 +5,32 @@ describe ProficienciesController, :type => :api do
   render_views
 
   before :each do
-    @user = User.create(first_name: 'Grass', last_name: 'Hopper', email: 'gh@ga.co', password: '123', password_confirmation: '123', role: 'apprentice')
-    @skill = Skill.create(skill_name: 'electrician')
-    @proficiency = Proficiency.create(proficiency_status: 'has', user: @user, skill: @skill)
+    @user1 = User.create(first_name: 'Grass', last_name: 'Hopper', email: 'gh@ga.co', password: '123', password_confirmation: '123', role: 'master')
+    @user2 = User.create(first_name: 'App', last_name: 'Rentice', email: 'ap@ga.co', password: '123', password_confirmation: '123', role: 'apprentice')
+    @skill1 = Skill.create(skill_name: 'electrician')
+    @skill2 = Skill.create(skill_name: 'jedi')
+    @proficiency1 = Proficiency.create(proficiency_status: 'has', user: @user1, skill: @skill1)
+    @proficiency2 = Proficiency.create(proficiency_status: 'desired', user: @user2, skill: @skill2)
   end
 
   describe 'GET index' do
 
-    it "returns list of proficiencies" do
-      get :index, :format => :json
-      expect(response.status).to eq 200
-      expect(JSON.load(response.body)["proficiencies"][0]["proficiency_status"]).to eq 'has'
-      expect(JSON.load(response.body)["proficiencies"][0]["links"]["user"]["id"]).to eq @user.id
-      expect(JSON.load(response.body)["proficiencies"][0]["links"]["skill"]["id"]).to eq @skill.id
+    context 'from /proficiencies' do
+      it "returns all proficiencies" do
+        get :index, :format => :json
+        expect(response.status).to eq 200
+        expect(JSON.load(response.body)["proficiencies"].length).to eq 2
+      end
+    end
+
+    context 'from /users/1/proficiencies' do
+      it "returns user1's proficiencies" do
+        get :index, user_id: @user1.id, :format => :json
+        expect(response.status).to eq 200
+        expect(JSON.load(response.body)["proficiencies"][0]['id']).to eq @proficiency1.id
+      end
     end
 
   end
 
-  describe "GET show" do
-
-    it "return specific message" do
-      get :show, id: Proficiency.first.id, :format => :json
-      expect(response.status).to eq 200
-    end
-
-  end
 end

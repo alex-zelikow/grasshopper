@@ -18,18 +18,9 @@ describe ApprenticeshipsController, :type => :api do
       get :index, :format => :json
       expect(response.status).to eq 200
       expect(JSON.load(response.body)["apprenticeships"][0]["end_date"]).to eq @apprenticeship.end_date.iso8601(3)
-      expect(JSON.load(response.body)["apprenticeships"][0]["links"]["master"]).to eq @user1.id
-      expect(JSON.load(response.body)["apprenticeships"][0]["links"]["apprentice"]).to eq @user2.id
-      expect(JSON.load(response.body)["apprenticeships"][0]["links"]["ratings"]).to eq [@rating1.id, @rating2.id]
-    end
-
-  end
-
-  describe "GET show" do
-
-    it "return specific apprenticeship" do
-      get :show, id: Apprenticeship.first.id, :format => :json
-      expect(response.status).to eq 200
+      expect(JSON.load(response.body)["apprenticeships"][0]["links"]["master"]['id']).to eq @user1.id
+      expect(JSON.load(response.body)["apprenticeships"][0]["links"]["apprentice"]['id']).to eq @user2.id
+      expect(JSON.load(response.body)["apprenticeships"][0]["links"]["ratings"][0]['id']).to eq @rating1.id
     end
 
   end
