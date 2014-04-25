@@ -69,7 +69,7 @@
                 / data-ng-repeat="user in filterByNameOrSkill(users, searchText) | filter:roleFilter"
                 textarea.form-control rows="3" data-ng-model="messageText"
               .modal-footer
-                button.btn.btn-primary type="button" data-ng-click="submitMessage(user, messageText)" Submit
+                button.btn.btn-primary type="button" data-ng-click="submitMessage(currentUser, user, messageText)" Submit
                 button.btn.btn-default data-dismiss="modal" type="button" Close
 
         div data-ng-show="message"

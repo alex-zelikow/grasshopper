@@ -35,18 +35,14 @@ Grasshopper.controller "SearchCtrl", ['$scope', '$location', 'User', '$http', ($
 
         $scope.conversation = existingConversation
         $scope.messages = existingConversation.links.messages
-      debugger
 
-  $scope.submitMessage = (user, messageText) ->
+  $scope.submitMessage = (currentUser, user, messageText) ->
     unless $scope.conversation
-      conversations = Restangular.all('conversations')
-      newConversation = {created_by: $scope.currentUser.id, created_for: user.id}
-      console.log conversations.post(newConversation)
-      binding.pry
-
-    # var baseAccounts = Restangular.all('accounts');
-    # var newAccount = {name: "Gonto's account"};
-    # baseAccounts.post(newAccount);
+      $http({
+        method: "POST"
+        url: "./api/conversations/"
+        data: { 'created_by_id': currentUser, 'created_for_id': user }
+      })
 
   $("ul.nav.nav-pills.nav-justified li a").click () ->
     $(this).parent().addClass("active").siblings().removeClass "active"

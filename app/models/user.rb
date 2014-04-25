@@ -4,8 +4,12 @@ class User < ActiveRecord::Base
   has_many :skills, through: :proficiencies
   has_many :apprenticeships
   has_many :ratings
-  has_many :conversations
+  has_many :conversations_by, class_name: "Conversation", inverse_of: :created_by
+  has_many :conversations_for, class_name: "Conversation", inverse_of: :created_for
   has_many :messages
+
+  accepts_nested_attributes_for :conversations_by
+  accepts_nested_attributes_for :conversations_for
 
   PASSWORD_RESET_TIME_LIMIT = 1.day
 

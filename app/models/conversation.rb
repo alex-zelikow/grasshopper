@@ -1,8 +1,11 @@
 class Conversation < ActiveRecord::Base
 
   has_many :messages
-  belongs_to :created_for, class_name: "User", foreign_key: "created_for"
-  belongs_to :created_by, class_name: "User", foreign_key: "created_by"
+  belongs_to :created_by, class_name: "User", inverse_of: :conversations_by
+  belongs_to :created_for, class_name: "User", inverse_of: :conversations_for
+
+  accepts_nested_attributes_for :created_by
+  accepts_nested_attributes_for :created_for
 
   scope :involve_user, lambda {|user| where(["created_for = ? or created_by = ?", user.id, user.id])}
 

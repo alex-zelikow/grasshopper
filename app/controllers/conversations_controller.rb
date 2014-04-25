@@ -16,10 +16,6 @@ class ConversationsController < ApplicationController
   end
 
   def create
-    binding.pry
-    params[:conversation][:created_by] = User.find(params[:created_by])
-    params[:conversation][:created_for] = User.find(params[:created_for])
-    binding.pry
 
     conversation = Conversation.new conversation_params
     binding.pry
@@ -43,7 +39,7 @@ class ConversationsController < ApplicationController
 
   def conversation_params
     binding.pry
-    params.require(:conversation).permit(:created_by, :created_for).pry
+    params.require(:conversation).permit(:created_by_id, :created_for_id)
   end
 
   def get_conversation

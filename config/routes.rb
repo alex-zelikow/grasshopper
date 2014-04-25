@@ -17,7 +17,7 @@ Grasshopper::Application.routes.draw do
   patch 'reset/:code'    => 'password#update',        as: :reset_password
 
   #Conversations
-  patch 'create/:conversation/:content/from/:sender/' => 'conversations#update', as: :add_message
+  post 'create/:conversation/:content/from/:sender/' => 'conversations#update', as: :add_message
 
   get 'privacy' => 'site#privacy'
   get 'terms'   => 'site#terms'

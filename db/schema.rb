@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 20140422071715) do
   add_index "apprenticeships", ["master_id"], name: "index_apprenticeships_on_master_id", using: :btree
 
   create_table "conversations", force: true do |t|
-    t.integer  "created_by"
-    t.integer  "created_for"
+    t.integer  "created_by_id"
+    t.integer  "created_for_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
