@@ -1,4 +1,4 @@
-.row
+.row data-ng-init="getCurrentUser()"
   .col-md-2.text-center
     img.img-responsive.img-circle src= "http://placekitten.com/500/500"
     .btn-group-vertical
@@ -32,4 +32,4 @@
       ul.list-group
         li.list-group-item data-ng-repeat="proficiency in currentUser.links.proficiencies"
           | {{ proficiency.skill }}
-          a.remove-skill href="" data-ng-click="removeSkill(proficiency.id)" Remove
+          a.remove-skill href="" data-ng-click="removeProficiency(proficiency.href)" Remove

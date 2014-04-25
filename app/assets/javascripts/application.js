@@ -5,7 +5,6 @@
 //= require main
 //= require angular.min
 //= require lodash
-//= require restangular
 //= require angular-route
 //= require angular-application
 //= require main

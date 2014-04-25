@@ -1,19 +1,4 @@
-Grasshopper.config( ['RestangularProvider', '$httpProvider', (RestangularProvider, $httpProvider) ->
-
-  RestangularProvider.setBaseUrl('/api')
-
-  RestangularProvider.addResponseInterceptor( (response, operation, route, url) ->
-    if operation == 'getList'
-      if route == 'user'
-        newResponse = response['users']
-      else
-        newResponse = response[route]
-    else if operation == 'get'
-      newResponse = response[route][0]
-    else
-      newResponse = response
-    newResponse
-  )
+Grasshopper.config( ['$httpProvider', ($httpProvider) ->
 
   authToken = $("meta[name=\"csrf-token\"]").attr("content")
   $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken
@@ -21,11 +6,11 @@ Grasshopper.config( ['RestangularProvider', '$httpProvider', (RestangularProvide
 ])
 
 Grasshopper.config(['$routeProvider', ($routeProvider) ->
-  $routeProvider.when('/edit-profile', { templateUrl: "<%= asset_path('edit-profile.html') %>", controller: 'UserCtrl' } )
+  $routeProvider.when('/edit-profile', { templateUrl: "<%= asset_path('edit-profile.html') %>", controller: 'EditProfileCtrl' } )
 
   $routeProvider.when('/search', { templateUrl: "<%= asset_path('search.html') %>", controller: 'SearchCtrl' } )
 
-  $routeProvider.when('/view-profile/:userID', { templateUrl: "<%= asset_path('view-profile.html') %>", controller: 'ViewProfileCtrl' } )
+  $routeProvider.when('/view-profile/:userId', { templateUrl: "<%= asset_path('view-profile.html') %>", controller: 'ViewProfileCtrl' } )
 
   $routeProvider.when('/conversation', { templateUrl: "<%= asset_path('conversation.html') %>", controller: 'ConversationCtrl' } )
 

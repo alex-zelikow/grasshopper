@@ -1,3 +1,3 @@
-Grasshopper.controller "ConversationCtrl", ['$scope', '$location', 'Restangular', 'targetUser', ($scope, $location, Restangular, targetUser) ->
+Grasshopper.controller "ConversationCtrl", ['$scope', '$location', 'User', ($scope, $location, User) ->
 
 ]

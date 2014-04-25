@@ -1,13 +1,7 @@
-Grasshopper.controller "IndexCtrl", ['$scope', '$location', 'Restangular', 'targetUser', ($scope, $location, Restangular, targetUser) ->
+Grasshopper.controller "IndexCtrl", ['$scope', '$location', '$http', 'User', ($scope, $location, $http, User) ->
 
-  initialize = () ->
-    baseUsers = Restangular.all('users')
-    baseUsers.getList().then (users) ->
-      $scope.users = users
-    $scope.targetUser = targetUser
-    targetUser.loadCurrentUser()
-
-  initialize()
+  User.loadCurrentUser().then (result) ->
+    $scope.currentUser = result
 
   $scope.editProfile = () ->
     $location.url '/edit-profile'

@@ -1,12 +1,7 @@
-Grasshopper.controller "SearchCtrl", ['$scope', '$location', 'Restangular', 'targetUser', ($scope, $location, Restangular, targetUser) ->
+Grasshopper.controller "SearchCtrl", ['$scope', '$location', 'User', ($scope, $location, User) ->
 
-  initialize = () ->
-    baseUsers = Restangular.all('users')
-    baseUsers.getList().then (users) ->
-      $scope.users = users
-    $scope.currentUser = targetUser.loadCurrentUser()
-
-  initialize()
+  User.loadAll().then (result) ->
+    $scope.users = result.users
 
   $scope.search = () ->
     $location.url '/search'
