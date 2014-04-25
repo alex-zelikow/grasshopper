@@ -4,4 +4,5 @@ Grasshopper.controller "ViewProfileCtrl", (['$scope', '$location', '$http', 'Use
 
   User.loadOne(userId).then (result) ->
     $scope.user = result.users[0]
+    $scope.apprenticeships = $scope.user.links.apprenticeships
 ])

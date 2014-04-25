@@ -21,7 +21,7 @@ Grasshopper.factory('User', ['$http', ($http) ->
     loadCurrentUser: () ->
       $http.get('./api/user').then (result) ->
         User.checkActive(result)
-        result.data.users[0]
+        result.data
 
     update: (userId, data) ->
       $http({
