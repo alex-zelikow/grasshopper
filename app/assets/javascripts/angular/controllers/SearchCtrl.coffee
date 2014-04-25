@@ -1,7 +1,10 @@
-Grasshopper.controller "SearchCtrl", ['$scope', '$location', 'User', ($scope, $location, User) ->
+Grasshopper.controller "SearchCtrl", ['$scope', '$location', 'User', '$http', ($scope, $location, User, $http) ->
 
   User.loadAll().then (result) ->
     $scope.users = result.users
+
+  User.loadCurrentUser().then (data) ->
+    $scope.currentUser = data.users[0]
 
   $scope.search = () ->
     $location.url '/search'
@@ -23,16 +26,16 @@ Grasshopper.controller "SearchCtrl", ['$scope', '$location', 'User', ($scope, $l
     filteredUsers
 
   $scope.checkForExistingConversation = (currentUser, selectedUser) ->
-    Restangular.one('conversations').getList().then (conversations) ->
-      console.log conversations
-      existingConversation = conversation for conversation in conversations when \
+    $http.get('./api/conversations').then (conversations) ->
+      existingConversation = conversation for conversation in conversations.data.conversations when \
         (conversation.links.created_by.id == selectedUser.id and \
         conversation.links.created_for.id == currentUser.id) or \
         (conversation.links.created_for.id == selectedUser.id and \
         conversation.links.created_by.id == currentUser.id)
+
         $scope.conversation = existingConversation
         $scope.messages = existingConversation.links.messages
-        binding.pry
+      debugger
 
   $scope.submitMessage = (user, messageText) ->
     unless $scope.conversation
